@@ -1,66 +1,44 @@
 import csv
 
-# with open("C:\data\output4.csv", 'w', newline='') as csvfile :
-#     fieldnames = ['first_name', 'last_name']
-#     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-#     write = csv.DictWriter()
-#
-#     writer.writeheader()
-#     writer.writerow({'first_name':'Baked','last_name':'Beans'})
-#     writer.writerow({'first_name': 'ram', 'last_name': 'joshi'})
-#     writer.writerow({'first_name': 'tim', 'last_name': 'cook'})
+## creating and writing into a  csv file
+with open('name.csv', 'w', newline='') as csvfile:               # create and open a csv file, w parameter is for the write
+    fieldnames = ['Student_ID', 'Name']                        # Enter 2 column names in the csv file
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)    ## Start writing into csv file
+    writer.writeheader()     # Write the headers in the csv file
+    count = input("Enter no. of rows to write in csv file : ")   # Enter no. of rows for csv file
+    name = [0] * int(count)                                      # Define and initialize array for the input values from keyboard
+    for i in range(0, int(count)):                               # for loop to traverse
+        name[0] = input("Enter First name : ")                   # Enter name from keyboard
+        name[1] = input("Enter Marks : ")                        # Enter marks  from keyboard
+        fieldnames = ['Name', 'Marks']                         # defining column names
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)  ## Start writing the data from keyboard
+        writer.writerow({'Name': str(name[0]), 'Marks': name[1]})   ##  Write the name and marks from keyboard into csv file
 
-# with open('names.csv', 'w', newline='') as csvfile:
-#     fieldnames = ['first_name', 'last_name']
-#     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-#
-#     writer.writeheader()
-#     writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
-#     writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
-#     writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
-from csv import reader
-from csv import writer
+with open("name.csv", "r") as csvfile:         # Open a csv file at given location and 'r' parameter is for reading.
+    reader_var = csv.reader(csvfile, delimiter=",")      # Store the rows of a csv file into a list variable
+    for row in reader_var:                       # for loop to traverse the csv data list
+        print(row)                              # Print the csv file data
 
-with open('input.csv', 'w', newline='') as csvfile:
-    fieldnames = ['Student_ID', 'First']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    writer.writeheader()
-    count = input("Enter no. of rows : ")
-    name = [0] * int(count)
-    for i in range(0, int(count)):
-        name[0] = input("Input student ID : ")
-        name[1] = input("Input First name : ")
-        fieldnames = ['Student_ID', 'last_name']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writerow({'Student_ID': str(name[0]), 'last_name': name[1]})
-with open('names6.csv', 'a', newline='') as csvfile:
-    fieldnames = ['last_name', 'Marks']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    writer.writeheader()
 
-count_rows = input("Enter no. of rows : ")
-last_name = [0]*int(count_rows)
-for i in range(0, int(count_rows)):
-    last_name[0] = input("Input last name : ")
-    last_name[1] = input("Input marks of students : ")
-    with open('names5.csv', 'a', newline='') as csvfile:
-        fieldnames = ['last_name', 'Marks']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writerow({'last_name': str(last_name[0]), 'Marks': last_name[1]})
-default_text = 'Some Text'
-# Open the input_file in read mode and output_file in write mode
-with open('input.csv', 'r') as read_obj, \
-        open('output_1.csv', 'w', newline='') as write_obj:
-    # Create a csv.reader object from the input file object
-    csv_reader = reader(read_obj)
-    # Create a csv.writer object from the output file object
-    csv_writer = writer(write_obj)
-    # Read each row of the input csv file as list
-    for row in csv_reader:
-        # Append the default text in the row / list
-        row.append(default_text)
-        # Add the updated row / list to the output file
-        csv_writer.writerow(row)
+### Append the data entered from keyboard into the existing csv file
+count_new = input("Enter no. of rows to be added in csv file: ")                 # enter no. of rows to append in the csv file
+name1 = [0]*int(count_new)                                # Define a new array for entering values from keyboard , for appending the data
+for i in range(0, int(count_new)):                        # for loop to traverse
+    name1[0] = input("Enter First name : ")               # Enter name from keyboard
+    name1[1] = input("Enter Marks : ")                     # Enter marks  from keyboard
+    with open('name.csv', 'a', newline='') as csvfile:     # Open an existing csv file, 'a' parameter is for the append in the file
+        fieldnames = ['Student_ID', 'Name']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)           ## Start writing the values from keyboard.
+        writer.writerow({'Student_ID': str(name1[0]), 'Name': name1[1]})  ##  Write the values entered from keyboard into csv file
+
+with open("name.csv", "r") as csvfile:                         # Open a csv file at given location and 'r' parameter is for reading.
+    reader_var = csv.reader(csvfile, delimiter=",")            # Store the rows of a csv file into a list variable
+    for row in reader_var:                                     # for loop to traverse the csv data list
+        print(row)                                             # Print the csv file data
+
+
+
+
 
 
 
